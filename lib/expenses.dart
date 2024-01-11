@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_expanses/add_expense.dart';
 import 'package:personal_expanses/models/expenses.model.dart';
 import 'package:personal_expanses/widgets/expenses_list.dart';
 
@@ -32,13 +32,24 @@ class _ExpensesState extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Hola"),
-          backgroundColor: Colors.indigo.shade300,
-        ),
-        body: Center(
-            child: Expanded(
-          child: ExpensesList(registeredExpenses: _registeredExpenses,)
-          ),
+            title: const Text("Expenses App"),
+            backgroundColor: Colors.indigo.shade300,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (c) {
+                        return const AddExpense();
+                      });
+                },
+                icon: const Icon(
+                  Icons.add,
+                ),
+              )
+            ]),
+        body: ExpensesList(
+          registeredExpenses: _registeredExpenses,
         ));
   }
 }
