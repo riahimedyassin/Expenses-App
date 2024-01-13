@@ -14,7 +14,7 @@ class AddExpense extends StatefulWidget {
 class _AddExpenseState extends State<AddExpense> {
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
-  late final DateTime? _date;
+  late final DateTime _date;
   String dateString = 'Select a date';
   ExpenseCategory _selectedCategory = ExpenseCategory.games;
   @override
@@ -22,6 +22,14 @@ class _AddExpenseState extends State<AddExpense> {
     super.dispose();
     _titleController.dispose();
     _priceController.dispose();
+  }
+  bool isValidData() {
+    final double? price = double.tryParse(_priceController.text); 
+    final String title = _titleController.text;
+    final DateTime date = _date ;  
+    final ExpenseCategory category = _selectedCategory ; 
+    if(price==null || price<0 || title.trim()=="" || date==null ) return false ; 
+    return true ; 
   }
 
   @override
