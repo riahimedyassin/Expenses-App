@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:personal_expanses/models/expenses.model.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
-
+  const AddExpense({required this.addExpense, super.key});
+  final void Function(Expense) addExpense;
   @override
   State<AddExpense> createState() => _AddExpenseState();
 }
@@ -14,7 +14,7 @@ class AddExpense extends StatefulWidget {
 class _AddExpenseState extends State<AddExpense> {
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
-  late final DateTime _date;
+  DateTime _date = DateTime.now();
   String dateString = 'Select a date';
   ExpenseCategory _selectedCategory = ExpenseCategory.games;
   @override
@@ -23,13 +23,13 @@ class _AddExpenseState extends State<AddExpense> {
     _titleController.dispose();
     _priceController.dispose();
   }
+
   bool isValidData() {
-    final double? price = double.tryParse(_priceController.text); 
+    final double? price = double.tryParse(_priceController.text);
     final String title = _titleController.text;
-    final DateTime date = _date ;  
-    final ExpenseCategory category = _selectedCategory ; 
-    if(price==null || price<0 || title.trim()=="" || date==null ) return false ; 
-    return true ; 
+    final DateTime date = _date;
+    final ExpenseCategory category = _selectedCategory;
+    return !(price == null || price < 0 || title.trim().isEmpty);
   }
 
   @override
@@ -91,10 +91,10 @@ class _AddExpenseState extends State<AddExpense> {
                             final firstDate = DateTime(DateTime.now().year - 1);
                             final lastDate = DateTime(DateTime.now().year + 1);
                             final DateTime? selectedDate = await showDatePicker(
-                              context: context,
-                              firstDate: firstDate,
-                              lastDate: lastDate,
-                            );
+                                context: context,
+                                firstDate: firstDate,
+                                lastDate: lastDate,
+                                initialDate: DateTime.now());
                             setState(() {
                               if (selectedDate == null) return;
                               _date = selectedDate;
@@ -121,8 +121,41 @@ class _AddExpenseState extends State<AddExpense> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      log(_titleController.text);
-                      log(_priceController.text);
+                      if (!isValidData()) {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) {
+                              return AlertDialog(
+                                title: const Text("Invalid Data"),
+                                icon: const Icon(Icons.error),
+                                content: const Text(
+                                    "Please verify the data you entered"),
+                                actions: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(ctx);
+                                          },
+                                          child: const Text("Go back"))
+                                    ],
+                                  )
+                                ],
+                              );
+                            });
+                      } else {
+                        Expense e = Expense(
+                          title: _titleController.text,
+                          amount: double.parse(_priceController.text),
+                          date: _date,
+                          category: _selectedCategory,
+                        );
+                        widget.addExpense(e);
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text(
                       'Save Expense',

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_expanses/models/expenses.model.dart';
 
 class ExpensesItem extends StatelessWidget {
-  const ExpensesItem({required this.item, super.key});
+  const ExpensesItem({required this.item , super.key});
   final Expense item;
   @override
   Widget build(BuildContext context) {
