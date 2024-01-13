@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:personal_expanses/models/expenses.model.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({required this.addExpense, super.key});
+  const AddExpense({required this.addExpense , super.key});
   final void Function(Expense) addExpense;
   @override
   State<AddExpense> createState() => _AddExpenseState();

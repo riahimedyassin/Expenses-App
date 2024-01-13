@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:personal_expanses/add_expense.dart';
 import 'package:personal_expanses/models/expenses.model.dart';
@@ -34,6 +36,12 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
+  void deleteExpanse(Expense e) {
+    setState(() {
+      _registeredExpenses.remove(e);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +65,7 @@ class _ExpensesState extends State<Expenses> {
               )
             ]),
         body: ExpensesList(
-          registeredExpenses: _registeredExpenses,
-        ));
+            registeredExpenses: _registeredExpenses,
+            deleteExpanse: deleteExpanse));
   }
 }
