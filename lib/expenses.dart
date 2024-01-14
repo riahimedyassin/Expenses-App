@@ -22,14 +22,24 @@ class _ExpensesState extends State<Expenses> {
         category: ExpenseCategory.games),
     Expense(
         title: "Hola",
-        amount: 20,
+        amount: 40,
         date: DateTime.now(),
         category: ExpenseCategory.food),
     Expense(
         title: "Hola",
-        amount: 20,
+        amount: 30,
         date: DateTime.now(),
         category: ExpenseCategory.travel),
+    Expense(
+        title: "Hola",
+        amount: 50,
+        date: DateTime.now(),
+        category: ExpenseCategory.travel),
+    Expense(
+        title: "Hola",
+        amount: 60,
+        date: DateTime.now(),
+        category: ExpenseCategory.food),
   ];
   void addExpense(Expense e) {
     setState(() {
