@@ -33,21 +33,18 @@ class MyApp extends StatelessWidget {
           ),
         ),
         textTheme: const TextTheme().copyWith(
-          titleLarge: const TextStyle(
-            color: Colors.black,
-          ),
-          bodyMedium: const TextStyle(
-            color : Colors.white
-          )
-
-        ),
+            titleLarge: const TextStyle(
+              color: Colors.black,
+            ),
+            bodyMedium: const TextStyle(color: Colors.white)),
         iconTheme: const IconThemeData().copyWith(
           color: Colors.white,
         ),
         inputDecorationTheme: const InputDecorationTheme().copyWith(
-          labelStyle: const TextStyle(color : Colors.black),
+          labelStyle: const TextStyle(color: Colors.black),
+          fillColor: Colors.black,
         ),
-  
+        
       ),
       home: const Expenses(),
     );

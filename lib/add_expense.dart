@@ -44,9 +44,13 @@ class _AddExpenseState extends State<AddExpense> {
               TextField(
                 controller: _titleController,
                 maxLength: 50,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.add),
-                    label: Text("Enter the expense name")),
+                  prefixIcon: Icon(Icons.add),
+                  label: Text("Enter the expense name"),
+                ),
               ),
               SizedBox(
                 width: double.infinity,
@@ -76,6 +80,9 @@ class _AddExpenseState extends State<AddExpense> {
                     child: TextField(
                       controller: _priceController,
                       keyboardType: TextInputType.number,
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
                       decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.price_change_outlined),
                           label: Text("Price")),
@@ -86,7 +93,11 @@ class _AddExpenseState extends State<AddExpense> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(dateString),
+                        Text(
+                          dateString,
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary),
+                        ),
                         IconButton(
                           onPressed: () async {
                             final firstDate = DateTime(DateTime.now().year - 1);
@@ -104,6 +115,7 @@ class _AddExpenseState extends State<AddExpense> {
                             });
                           },
                           icon: const Icon(Icons.date_range),
+                          color: Theme.of(context).colorScheme.primary,
                         )
                       ],
                     ),
@@ -143,10 +155,11 @@ class _AddExpenseState extends State<AddExpense> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.pop(ctx);
-                                          },
-                                          child: const Text("Go back"))
+                                        onPressed: () {
+                                          Navigator.pop(ctx);
+                                        },
+                                        child: const Text("Go back"),
+                                      )
                                     ],
                                   )
                                 ],

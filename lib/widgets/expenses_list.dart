@@ -13,7 +13,13 @@ class ExpensesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: registeredExpenses.length,
-      itemBuilder: (context, index) => Dismissible(
+      itemBuilder: (ctx, index) => Dismissible(
+        background: Container(
+          color: Theme.of(ctx).colorScheme.error.withOpacity(0.7),
+          width: double.infinity,
+          height: double.infinity,
+          margin: Theme.of(ctx).cardTheme.margin
+        ),
         // the delete function musty take the same key passed , so Flutter could track the changes , do not pass INDEX
         key: ValueKey(registeredExpenses[index]),
         child: ExpensesItem(item: registeredExpenses[index]),

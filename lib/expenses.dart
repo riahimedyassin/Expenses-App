@@ -40,29 +40,37 @@ class _ExpensesState extends State<Expenses> {
     setState(() {
       _registeredExpenses.remove(e);
     });
+    final snackBar = SnackBar(
+      content: const Text('Deleted successfully'),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          // Code to undo the action
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: const Text("Expenses App"),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (c) {
-                        return AddExpense(
-                          addExpense: addExpense,
-                        );
-                      });
-                },
-                icon: const Icon(
-                  Icons.add,
-                ),
-              )
-            ]),
+        appBar: AppBar(title: const Text("Expenses App"), actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (c) {
+                    return AddExpense(
+                      addExpense: addExpense,
+                    );
+                  });
+            },
+            icon: const Icon(
+              Icons.add,
+            ),
+          )
+        ]),
         body: ExpensesList(
             registeredExpenses: _registeredExpenses,
             deleteExpanse: deleteExpanse));
