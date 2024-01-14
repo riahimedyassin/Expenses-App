@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:personal_expanses/models/expenses.model.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({required this.addExpense , super.key});
+  const AddExpense({required this.addExpense, super.key});
   final void Function(Expense) addExpense;
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -51,6 +51,7 @@ class _AddExpenseState extends State<AddExpense> {
               SizedBox(
                 width: double.infinity,
                 child: DropdownButton(
+                  style: Theme.of(context).inputDecorationTheme.labelStyle,
                   value: _selectedCategory,
                   items: ExpenseCategory.values.map(
                     (e) {
@@ -126,10 +127,15 @@ class _AddExpenseState extends State<AddExpense> {
                             context: context,
                             builder: (ctx) {
                               return AlertDialog(
-                                title: const Text("Invalid Data"),
+                                title: Text(
+                                  "Invalid Data",
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
                                 icon: const Icon(Icons.error),
                                 content: const Text(
-                                    "Please verify the data you entered"),
+                                  "Please verify the data you entered",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                                 actions: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

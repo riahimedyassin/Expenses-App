@@ -20,6 +20,7 @@ class ExpensesItem extends StatelessWidget {
                 children: [
                   Text(
                     "${item.amount.toStringAsFixed(2)} \$",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const Spacer(),
                   Row(

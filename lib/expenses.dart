@@ -47,7 +47,6 @@ class _ExpensesState extends State<Expenses> {
     return Scaffold(
         appBar: AppBar(
             title: const Text("Expenses App"),
-            backgroundColor: Colors.indigo.shade300,
             actions: [
               IconButton(
                 onPressed: () {
