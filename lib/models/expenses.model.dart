@@ -36,3 +36,21 @@ class Expense {
     return dateTime.format(date);
   }
 }
+
+class ExpensePocket {
+  const ExpensePocket(this.expenses, this.category);
+  ExpensePocket.forCategory(List<Expense> allExpenses, this.category)
+      : expenses = allExpenses
+            .where((element) => element.category == category)
+            .toList();
+
+  final ExpenseCategory category;
+  final List<Expense> expenses;
+  double get totalExpenses {
+    double total = 0;
+    for (var expense in expenses) {
+      total += expense.amount;
+    }
+    return total;
+  }
+}

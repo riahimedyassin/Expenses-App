@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:personal_expanses/add_expense.dart';
+import 'package:personal_expanses/chart/chart.dart';
 import 'package:personal_expanses/models/expenses.model.dart';
 import 'package:personal_expanses/widgets/expenses_list.dart';
 
@@ -55,24 +56,37 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Expenses App"), actions: [
-          IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (c) {
-                    return AddExpense(
-                      addExpense: addExpense,
-                    );
-                  });
-            },
-            icon: const Icon(
-              Icons.add,
-            ),
-          )
-        ]),
-        body: ExpensesList(
-            registeredExpenses: _registeredExpenses,
-            deleteExpanse: deleteExpanse));
+      appBar: AppBar(title: const Text("Expenses App"), actions: [
+        IconButton(
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (c) {
+                  return AddExpense(
+                    addExpense: addExpense,
+                  );
+                });
+          },
+          icon: const Icon(
+            Icons.add,
+          ),
+        )
+      ]),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Chart(expenses: _registeredExpenses),
+            Expanded(
+              child: ExpensesList(
+                registeredExpenses: _registeredExpenses,
+                deleteExpanse: deleteExpanse,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
