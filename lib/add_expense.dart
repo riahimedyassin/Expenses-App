@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -27,8 +26,6 @@ class _AddExpenseState extends State<AddExpense> {
   bool isValidData() {
     final double? price = double.tryParse(_priceController.text);
     final String title = _titleController.text;
-    final DateTime date = _date;
-    final ExpenseCategory category = _selectedCategory;
     return !(price == null || price < 0 || title.trim().isEmpty);
   }
 
@@ -111,7 +108,7 @@ class _AddExpenseState extends State<AddExpense> {
                               if (selectedDate == null) return;
                               _date = selectedDate;
                               dateString =
-                                  DateFormat.yMMMMd().format(_date!).toString();
+                                  DateFormat.yMMMMd().format(_date).toString();
                             });
                           },
                           icon: const Icon(Icons.date_range),
