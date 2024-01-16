@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:personal_expanses/add_expense.dart';
 import 'package:personal_expanses/chart/chart.dart';
@@ -64,6 +63,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(title: const Text("Expenses App"), actions: [
         IconButton(
@@ -82,19 +82,33 @@ class _ExpensesState extends State<Expenses> {
         )
       ]),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Chart(expenses: _registeredExpenses),
-            Expanded(
-              child: ExpensesList(
-                registeredExpenses: _registeredExpenses,
-                deleteExpanse: deleteExpanse,
+        child: width < 600
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(child: Chart(expenses: _registeredExpenses)),
+                  Expanded(
+                    child: ExpensesList(
+                      registeredExpenses: _registeredExpenses,
+                      deleteExpanse: deleteExpanse,
+                    ),
+                  )
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(child: Chart(expenses: _registeredExpenses)),
+                  Expanded(
+                    child: ExpensesList(
+                      registeredExpenses: _registeredExpenses,
+                      deleteExpanse: deleteExpanse,
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
       ),
     );
   }
